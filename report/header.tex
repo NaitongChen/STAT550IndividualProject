@@ -1,0 +1,45 @@
+% header.tex
+% this is where you load pacakges, specify custom formats, etc.
+
+\usepackage[left=1in,right=1in,top=0.75in,footskip=25pt]{geometry} 
+% \usepackage{changepage}
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools,bm,subcaption}
+% enumitem for custom lists
+\usepackage{enumitem}
+% Load dsfont this to get proper indicator function (bold 1) with \mathds{1}:
+\usepackage{dsfont}
+\usepackage{centernot}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+
+% set up commenting code (I will use this during marking)
+\definecolor{CommentColor}{rgb}{0,.50,.50}
+\newcounter{margincounter}
+\newcommand{\displaycounter}{{\arabic{margincounter}}}
+\newcommand{\incdisplaycounter}{{\stepcounter{margincounter}\arabic{margincounter}}}
+\newcommand{\COMMENT}[1]{\textcolor{CommentColor}{$\,^{(\incdisplaycounter)}$}\marginpar{\scriptsize\textcolor{CommentColor}{ {\tiny $(\displaycounter)$} #1}}}
+
+\usepackage{appendix}
+
+% set up graphics
+\usepackage{graphicx,float}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+\graphicspath{ {fig/} }
+
+\usepackage[sorting=nyt,backend=bibtex,bibstyle=alphabetic,citestyle=alphabetic,giveninits=true]{biblatex}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setlength{\headheight}{40pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% most other packages you might use should be loaded before hyperref
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Set up hyperlinks:
+\definecolor{RefColor}{rgb}{0,0,.65}
+\usepackage[colorlinks,linkcolor=RefColor,citecolor=RefColor,urlcolor=RefColor]{hyperref}
+
+\usepackage[capitalize]{cleveref}
+\crefname{appsec}{Appendix}{Appendices} % you can tell cleveref what to call things

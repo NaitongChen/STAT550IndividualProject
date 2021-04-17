@@ -1,0 +1,33 @@
+\documentclass[10pt]{article}
+\input{header}
+\input{defs}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% your title/author/date information go here
+\title{Consulting Report on Mental Distress} % replace with your title
+\author{Naitong Chen} % replace with your name
+\date{\today} % replace with your submission date
+
+\bibliography{sources.bib} % add the title of your bibliography file
+
+% start of document
+\begin{document}
+
+\maketitle
+\newpage
+\input{sections/introduction}
+\input{sections/eda}
+\input{sections/confirmatory}
+\input{sections/conclusion}
+
+%%%% appendix
+\clearpage
+\appendix
+\input{sections/supplementary}
+
+% bibliography
+\clearpage
+\printbibliography
+
+\end{document}

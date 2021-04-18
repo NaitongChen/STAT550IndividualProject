@@ -118,7 +118,7 @@ intercept + month + education & /&/ & 0.997 \\
 \end{table}
 
 \section{Additional Assumption Check Plots}
-
+\subsection{Control Group}
 \begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -140,7 +140,7 @@ intercept + month + education & /&/ & 0.997 \\
 \caption{QQ plot for the random effects on the intercept (t-test: 1, Wilcoxon: 0.405)}
 \label{fig:re.control}
 \end{figure}
-
+\subsection{Both Groups Combined}
 \begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -353,3 +353,6 @@ education & -0.446 & 0.168 & -2.655 & 43.400 & 0.011 \\
 \caption{Output of pooled GEE model (robust)}
 \label{tab:gee.mi.robust}
 \end{table}
+
+\section{R Code Excerpt (Intervention Group)}
+\lstinputlisting[language=R]{C:/2020W2/STAT550/individualproject/excerpt.R}

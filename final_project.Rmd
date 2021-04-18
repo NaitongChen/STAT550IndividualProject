@@ -176,19 +176,11 @@ model_d1 = lm(GSI ~ month + gender, data = dat_cc_trt)
 model_d4 = lm(GSI ~ month + education, data = dat_cc_trt)
 model_both = lm(GSI ~ month + gender + education, data = dat_cc_trt)
 
-AIC_base = AIC(logLik(model_base, REML=T)); AIC_base
-AIC_d1 = AIC(logLik(model_d1, REML=T)); AIC_d1
-AIC_d4 = AIC(logLik(model_d4, REML=T)); AIC_d4
-AIC_both = AIC(logLik(model_both, REML=T)); AIC_both # lowest
+lrtest(model_base, model_d1)
+lrtest(model_base, model_d4)
 
-BIC_base = BIC(logLik(model_base, REML=T)); BIC_base
-BIC_d1 = BIC(logLik(model_d1, REML=T)); BIC_d1 # lowest
-BIC_d4 = BIC(logLik(model_d4, REML=T)); BIC_d4
-BIC_both = BIC(logLik(model_both, REML=T)); BIC_both
-
-lrtest(model_d1, model_both) # significant
-lrtest(model_d4, model_both) # significant
-lrtest(model_base, model_both) # significant
+lrtest(model_d1, model_both)
+lrtest(model_d4, model_both)
 
 # control
 model_base = lm(GSI ~ month, data = dat_cc_con)
@@ -196,19 +188,11 @@ model_d1 = lm(GSI ~ month + gender, data = dat_cc_con)
 model_d4 = lm(GSI ~ month + education, data = dat_cc_con)
 model_both = lm(GSI ~ month + gender + education, data = dat_cc_con)
 
-AIC_base = AIC(logLik(model_base, REML=T)); AIC_base
-AIC_d1 = AIC(logLik(model_d1, REML=T)); AIC_d1
-AIC_d4 = AIC(logLik(model_d4, REML=T)); AIC_d4
-AIC_both = AIC(logLik(model_both, REML=T)); AIC_both # lowest
+lrtest(model_base, model_d1)
+lrtest(model_base, model_d4)
 
-BIC_base = BIC(logLik(model_base, REML=T)); BIC_base
-BIC_d1 = BIC(logLik(model_d1, REML=T)); BIC_d1
-BIC_d4 = BIC(logLik(model_d4, REML=T)); BIC_d4
-BIC_both = BIC(logLik(model_both, REML=T)); BIC_both # lowest
-
-lrtest(model_d1, model_both) # significant
-lrtest(model_d4, model_both) # significant
-lrtest(model_base, model_both) # significant
+lrtest(model_d1, model_both)
+lrtest(model_d4, model_both)
 ```
 
 ```{r interval.p1.cc}
@@ -235,9 +219,34 @@ model_month = lme(GSI ~ month + gender + education,
                   random= ~ month | SN, data = dat_cc_trt_g,
                   control = lmeControl(opt='optim'))
 
+model_d1 = lme(GSI ~ month + gender + education, 
+                  random= ~ gender | SN, data = dat_cc_trt_g,
+                  control = lmeControl(opt='optim'))
+
+model_d4 = lme(GSI ~ month + gender + education, 
+                  random= ~ education | SN, data = dat_cc_trt_g,
+                  control = lmeControl(opt='optim'))
+
+model_d1d4 = lme(GSI ~ month + gender + education, 
+                  random= ~ gender + education | SN, data = dat_cc_trt_g,
+                  control = lmeControl(opt='optim'))
+
+model_monthd1 = lme(GSI ~ month + gender + education, 
+                  random= ~ month + gender | SN, data = dat_cc_trt_g,
+                  control = lmeControl(opt='optim'))
+
+model_monthd4 = lme(GSI ~ month + gender + education, 
+                  random= ~ month + education | SN, data = dat_cc_trt_g,
+                  control = lmeControl(opt='optim'))
+
 anova(model_intercept, model_base)
+
 anova(model_month, model_intercept) # winner
-anova(model_month, model_base)
+anova(model_d1, model_intercept)
+anova(model_d4, model_intercept)
+
+anova(model_monthd1, model_month)
+anova(model_monthd4, model_month)
 ```
 
 ```{r select.random.effect.p1.cc.control}
@@ -249,10 +258,18 @@ model_intercept = lme(GSI ~ month + gender + education,
 model_month = lme(GSI ~ month + gender + education, 
                   random= ~ month | SN, data = dat_cc_con_g,
                   control = lmeControl(opt='optim'))
+model_d1 = lme(GSI ~ month + gender + education, 
+                  random= ~ gender | SN, data = dat_cc_con_g,
+                  control = lmeControl(opt='optim'))
+model_d4 = lme(GSI ~ month + gender + education, 
+                  random= ~ education | SN, data = dat_cc_con_g,
+                  control = lmeControl(opt='optim'))
 
 anova(model_intercept, model_base) # winner
+
 anova(model_month, model_intercept)
-anova(model_month, model_base)
+anova(model_d1, model_intercept)
+anova(model_d4, model_intercept)
 ```
 
 ```{r fit.lme.p1.cc}
@@ -332,19 +349,10 @@ model_d1 = lm(GSI ~ treatment + month + gender, data = dat_cc)
 model_d4 = lm(GSI ~ treatment + month + education, data = dat_cc)
 model_both = lm(GSI ~ treatment + month + gender + education, data = dat_cc)
 
-AIC_base = AIC(logLik(model_base, REML=T)); AIC_base
-AIC_d1 = AIC(logLik(model_d1, REML=T)); AIC_d1
-AIC_d4 = AIC(logLik(model_d4, REML=T)); AIC_d4
-AIC_both = AIC(logLik(model_both, REML=T)); AIC_both # lowest
-
-BIC_base = BIC(logLik(model_base, REML=T)); BIC_base
-BIC_d1 = BIC(logLik(model_d1, REML=T)); BIC_d1
-BIC_d4 = BIC(logLik(model_d4, REML=T)); BIC_d4
-BIC_both = BIC(logLik(model_both, REML=T)); BIC_both # lowest
-
-lrtest(model_d1, model_both) # significant
-lrtest(model_d4, model_both) # significant
-lrtest(model_base, model_both) # significant
+lrtest(model_base, model_d1)
+lrtest(model_base, model_d4)
+lrtest(model_d1, model_both)
+lrtest(model_d4, model_both)
 ```
 
 ```{r select.random.effect.p2.cc}
@@ -355,10 +363,33 @@ model_intercept = lme(GSI ~ treatment + month + gender + education,
 model_month = lme(GSI ~ treatment + month + gender + education, 
                   random= ~ month | SN, data = dat_cc_g,
                   control = lmeControl(opt='optim'))
+model_d1 = lme(GSI ~ treatment + month + gender + education, 
+                  random= ~ gender | SN, data = dat_cc_g,
+                  control = lmeControl(opt='optim'))
+model_d4 = lme(GSI ~ treatment + month + gender + education, 
+                  random= ~ education | SN, data = dat_cc_g,
+                  control = lmeControl(opt='optim'))
+model_trt = lme(GSI ~ treatment + month + gender + education, 
+                  random= ~ treatment | SN, data = dat_cc_g,
+                  control = lmeControl(opt='optim'))
+model_monthd1 = lme(GSI ~ treatment + month + gender + education, 
+                  random= ~ month + gender | SN, data = dat_cc_g,
+                  control = lmeControl(opt='optim'))
+model_monthd4 = lme(GSI ~ treatment + month + gender + education, 
+                  random= ~ month + education | SN, data = dat_cc_g,
+                  control = lmeControl(opt='optim'))
+model_monthtrt = lme(GSI ~ treatment + month + gender + education, 
+                  random= ~ treatment + month | SN, data = dat_cc_g,
+                  control = lmeControl(opt='optim'))
 
-anova(model_intercept, model_base)
 anova(model_month, model_intercept) # winner
-anova(model_month, model_base)
+anova(model_d1, model_intercept)
+anova(model_d4, model_intercept)
+anova(model_trt, model_intercept)
+
+anova(model_monthd1, model_month)
+anova(model_monthd4, model_month)
+anova(model_monthtrt, model_month)
 ```
 
 ```{r fit.lme.p2.cc}

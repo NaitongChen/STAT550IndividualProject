@@ -1,22 +1,21 @@
 \section{Model-Based Statistical Analysis} \label{sec:confirmatory}
 
-AIC \cite{wu2009mixed}
-
 \subsection{Model Selection}
+LRT \cite{wu2009mixed}
 
 \begin{table}[H]
 \centering
-\begin{tabular}{|l|l|l|l|l|}
+\begin{tabular}{|l|l|l|}
 \hline
-& month & month + gender & month + education & month + gender + education \\
+& month & month + gender + education \\
 \hline
-AIC & 3979.734 & 3947.393 & 3976.155 & 3946.259 \\
+month + gender & 0 & 0.016 \\
 \hline
-BIC & 3992.965 & 3965.027 & 3993.789 & 3968.293\\
+month + education & 0.004 & 0 \\
 \hline
 \end{tabular}
-\caption{Comparison of models with different covariates under the intervention group}
-\label{tab:model.comp.intervention}
+\caption{P values of Likelihood Ratio tests between models with different covariates under the intervention group}
+\label{tab:model.comp.treatment.lrt}
 \end{table}
 
 \begin{figure}[H]
@@ -40,46 +39,28 @@ BIC & 3992.965 & 3965.027 & 3993.789 & 3968.293\\
 \end{figure}
 
 \begin{table}[H]
-\begin{minipage}{0.5\textwidth}
 \centering
-\resizebox{\linewidth}{!}{
 \begin{tabular}{|l|l|l|l|}
 \hline
-& no mixed effect & intercept & intercept and slope \\
+& no mixed effect & intercept & intercept + month \\
 \hline
-AIC & 3946.259 & 3646.267 & 3643.133 \\
+intercept & 0 &/ &/ \\
 \hline
-BIC & 3968.293 & 3672.708 & 3678.388 \\
+intercept + month &/ & 0.028 &/ \\
 \hline
-\end{tabular}
-}
-\caption{Comparison of models with different mixed effects under the intervention group}
-\label{tab:model.comp.treatmemt.me}
-\end{minipage}
-\hfill
-\begin{minipage}{0.5\textwidth}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}{|l|l|l|l|}
+intercept + gender &/ & 0.784 &/ \\
 \hline
-& no mixed effect & intercept & intercept and slope \\
+intercept + education &/ & 0.998 &/ \\
 \hline
-no mixed effect & N/A & 0 & 0 \\
+intercept + month + gender & /&/ & 0.893 \\
 \hline
-intercept & 0 & N/A & 0.028 \\
-\hline
-intercept and slope & 0 & 0.028 & N/A \\
+intercept + month + education & /&/ & 0.995 \\
 \hline
 \end{tabular}
-}
 \caption{P values of Likelihood Ratio tests between models with different mixed effects under the intervention group}
 \label{tab:model.comp.treatment.me.lrt}
-\end{minipage}
 \end{table}
-
-\subsection{Change in Mental Distress over Time in Each Group}
-
-\subsubsection{Assumption Check}
+\subsection{Assumption Check}
 
 \begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
@@ -111,10 +92,8 @@ intercept and slope & 0 & 0.028 & N/A \\
 \label{fig:re.treatment}
 \end{figure}
 
-\subsubsection{Linear Mixed Model}
-
-\subsubsection{Generalized Estimating Equation}
-
+\subsection{Analysis results}
+\subsubsection{Changes in Mental Distress over Time}
 \begin{table}[H]
 \begin{minipage}{0.5\textwidth}
 \centering
@@ -159,16 +138,98 @@ education & -0.194 & 0.170 & -1.146 & 0.173 & -1.125\\
 \end{minipage}
 \end{table}
 
-\subsection{Effectiveness of Intervention}
+\begin{table}[H]
+\begin{minipage}{0.5\textwidth}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+  & Value & Std.Error & DF & t-value & p-value\\
+\hline
+(Intercept) & 19.235 & 4.151 & 308 & 4.634 & 0.000\\
+\hline
+month & -0.020 & 0.008 & 308 & -2.394 & 0.017\\
+\hline
+gender2 & 2.606 & 1.383 & 95 & 1.884 & 0.063\\
+\hline
+education & -0.822 & 0.273 & 95 & -3.015 & 0.003\\
+\hline
+\end{tabular}
+}
+\caption{Output of Linear Mixed Model under the control group}
+\label{tab:lme.control}
+\end{minipage}
+\hfill
+\begin{minipage}{0.5\textwidth}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+  & Estimate & Naive S.E. & Naive z & Robust S.E. & Robust z\\
+\hline
+(Intercept) & 19.267 & 3.433 & 5.613 & 3.229 & 5.967\\
+\hline
+month & -0.027 & 0.013 & -2.019 & 0.010 & -2.606\\
+\hline
+gender2 & 2.220 & 1.148 & 1.935 & 1.216 & 1.825\\
+\hline
+education & -0.809 & 0.225 & -3.596 & 0.203 & -3.994\\
+\hline
+\end{tabular}
+}
+\caption{Output of GEE model under the control group}
+\label{tab:gee.control}
+\end{minipage}
+\end{table}
 
-\subsubsection{Linear Mixed Model}
+\subsubsection{Effectiveness of Mental Health Intervention}
 
-\subsubsection{Assumption Check}
-
-\subsubsection{Generalized Estimating Equation}
+\begin{table}[H]
+\begin{minipage}{0.5\textwidth}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+  & Value & Std.Error & DF & t-value & p-value\\
+\hline
+(Intercept) & 15.418 & 2.341 & 774 & 6.586 & 0.000\\
+\hline
+treatment2 & -0.193 & 0.731 & 238 & -0.264 & 0.792\\
+\hline
+month & -0.037 & 0.006 & 774 & -5.893 & 0.000\\
+\hline
+gender2 & 2.737 & 0.776 & 238 & 3.527 & 0.001\\
+\hline
+education & -0.516 & 0.157 & 238 & -3.295 & 0.001\\
+\hline
+\end{tabular}
+}
+\caption{Output of Linear Mixed Model}
+\label{tab:lme}
+\end{minipage}
+\hfill
+\begin{minipage}{0.5\textwidth}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{tabular}{|l|r|r|r|r|r|}
+\hline
+  & Estimate & Naive S.E. & Naive z & Robust S.E. & Robust z\\
+\hline
+(Intercept) & 14.685 & 2.046 & 7.176 & 2.053 & 7.154\\
+\hline
+treatment2 & -0.430 & 0.641 & -0.671 & 0.735 & -0.586\\
+\hline
+month & -0.039 & 0.008 & -4.666 & 0.006 & -6.040\\
+\hline
+gender2 & 2.693 & 0.680 & 3.961 & 0.716 & 3.763\\
+\hline
+education & -0.455 & 0.136 & -3.337 & 0.139 & -3.278\\
+\hline
+\end{tabular}
+}
+\caption{Output of GEE model}
+\label{tab:gee}
+\end{minipage}
+\end{table}
 
 \subsection{Handling Missing Data}
-
-\subsubsection{Change in Mental Distress over Time in Each Group}
-
-\subsubsection{Effectiveness of Intervention}

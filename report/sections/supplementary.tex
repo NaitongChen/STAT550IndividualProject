@@ -20,7 +20,7 @@ control & 0.424 & female & 0.659\\
 \end{table}
 
 \section{Additional Model Selection Tables and Plots}
-\subsection{Covariate Selection for The Control Group}
+\subsection{Covariate Selection for The Control Group}\label{app:cov.control}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -35,7 +35,22 @@ month + education & 0 & 0 \\
 \caption{P values of Likelihood Ratio tests between models with different covariates under the control group}
 \label{tab:model.comp.control.lrt}
 \end{table}
-\subsection{Random Effect Selection for The Control Group}
+\subsection{Covariate Selection for Both Groups Combined}\label{app:cov.both}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+& treatment + month & treatment + month + gender + education \\
+\hline
+treatment + month + gender & 0 & 0 \\
+\hline
+treatment + month + education & 0 & 0 \\
+\hline
+\end{tabular}
+\caption{P values of Likelihood Ratio tests between models with different covariates}
+\label{tab:model.comp.lrt}
+\end{table}
+\subsection{Random Effect Selection for The Control Group}\label{app:re.control}
 \begin{figure}[H]
 \begin{subfigure}{.33\textwidth}
   \centering
@@ -74,22 +89,7 @@ intercept + education &/ & 0.981 \\
 \caption{P values of Likelihood Ratio tests between models with different mixed effects under the control group}
 \label{tab:model.comp.control.me.lrt}
 \end{table}
-\subsection{Covariate Selection for Both Groups Combined}
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-& treatment + month & treatment + month + gender + education \\
-\hline
-treatment + month + gender & 0 & 0 \\
-\hline
-treatment + month + education & 0 & 0 \\
-\hline
-\end{tabular}
-\caption{P values of Likelihood Ratio tests between models with different covariates}
-\label{tab:model.comp.lrt}
-\end{table}
-\subsection{Random Effect Selection for Both Groups Combined}
+\subsection{Random Effect Selection for Both Groups Combined}\label{app:re.both}
 \begin{table}[H]
 \centering
 \begin{tabular}{|l|l|l|l|}
@@ -120,12 +120,13 @@ intercept + month + education & /&/ & 0.997 \\
 \section{Additional Assumption Check Plots}
 \subsection{Control Group}
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\centering
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/qq_residual_control.png}
   \caption{residual QQ plot}
 \end{subfigure}
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/residual_control.png}
   \caption{fitted value vs. residual (t-test: 1, Wilcoxon: 0.501)}
@@ -136,18 +137,19 @@ intercept + month + education & /&/ & 0.997 \\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\linewidth]{../../plots/qq_intercept_treatment.png}
+\includegraphics[width=0.4\linewidth]{../../plots/qq_intercept_treatment.png}
 \caption{QQ plot for the random effects on the intercept (t-test: 1, Wilcoxon: 0.405)}
 \label{fig:re.control}
 \end{figure}
 \subsection{Both Groups Combined}
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\centering
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/qq_residual.png}
   \caption{residual QQ plot}
 \end{subfigure}
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/residual.png}
   \caption{fitted value vs. residual (t-test: 1, Wilcoxon: 0.143)}
@@ -157,12 +159,13 @@ intercept + month + education & /&/ & 0.997 \\
 \end{figure}
 
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\centering
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/qq_intercept.png}
   \caption{QQ plot for the random effects on the intercept (t-test: 1, Wilcoxon: 0.207)}
 \end{subfigure}
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/qq_slope.png}
   \caption{QQ plot for the random effects on the slope (t-test: 1, Wilcoxon: 0.786)}

@@ -1,4 +1,4 @@
-\section{Exploratory Data Analysis}
+\section{Exploratory Data Analysis}\label{sec:eda}
 We begin by giving an overview of the data recorded in the study. A description of each variable is shown in \cref{tab:var.decription}. Note that a higher GSI score indicates a higher level of mental distress. There are five recordings of the GSI score (response) for each participant, measured respectively at the beginning of the study (0), and three (3), six (6), eighteen (18), and sixty (60) months later, as indicated by the month variable. While none of the other variables change over time, the repeated GSI measurements make this study longitudinal.\\\\
 Of all 271 participants in the study, 57.6\% were randomly placed in the intervention group and the remaining 42.4\% were in the control group. Excluding those whose gender are unknown, 34.1\% of the participants are male and 65.9\% are female (\cref{tab:summ.stat.cat}). While the split between the two treatment groups is roughly balanced, there may be a slight underrepresentation of male participants in the data. However, since there are as many as 271 participants in total, there are still many participants that are male. Therefore there should not be a major impact of the unbalanced gender proportions.
 \begin{table}[H]
@@ -62,13 +62,13 @@ proportion & 0.015 & 0.026 & 0.037 & 0.140 & 0.192 & 0.387 & 0.362 \\
 We now use side-by-side boxplots to get a rough idea of how the two main questions laid out in \cref{sec:introduction} can be answered. We first visualize the changes in the GSI scores over time for both the intervention group and the control group. Note that the p-values of the ANOVA and Kruskal-Wallis tests are also included in the caption for each of the two groups. In this case, ANOVA, as a generalization of the commonly known t-test, tests whether the mean GSI scores are the same across each of the five time points. Since ANOVA assumes the data to be normally distributed, which may not hold, the Kruskal-Wallis test is also conducted as a non-parametric alternative. The Kruskal-Wallis test does not make the normality assumption and is relatively robust against outliers, which can be seen to be present in \cref{fig:boxplot.over.time}. The Kruskal-Wallis test here serves as a reference to check the reliability of the results from the ANOVA tests.\\\\
 From \cref{fig:boxplot.over.time}, we see that a downward trend of GSI over time is present in both groups. At the same time, the p-values from the ANOVA and Kruskal-Wallis tests (all $<0.021$) indicate that there is moderate to strong evidence against that the mean GSI scores are the same across all five time points. It is then suggested that the participants' mental distresses in both groups decrease significantly over time.
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\centering
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/box_over_time_treatment.png}
   \caption{intervention group (ANOVA: 0, Kruskal-Wallis: 0)}
 \end{subfigure}
-\hfill
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/box_over_time_control.png}
   \caption{control group (ANOVA: 0.021, Kruskal-Wallis: 0.006)}
@@ -102,7 +102,7 @@ From \cref{fig:boxplot.over.time}, we see that a downward trend of GSI over time
 \label{fig:boxplot.between.groups}
 \end{figure}
 \subsection{Association between Explanatory Variables}
-\begin{wrapfigure}{r}{.5\textwidth}
+\begin{wrapfigure}{r}{.4\textwidth}
 \includegraphics[width=1\linewidth]{../../plots/box_correlation.png}
 \caption{Side-by-side boxplot of education between the two genders (t-test: 0.014, Wilcoxon: 0.045)}
 \label{tab:boxplot.correlation}

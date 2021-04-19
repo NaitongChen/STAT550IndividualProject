@@ -1,4 +1,4 @@
 # STAT550 Individual Project
-PDF rerprt: [/report/main.pdf](here)
+PDF rerprt: [here](/report/main.pdf)
 
-R code: [final_project.Rmd](here)
+R code: [here](final_project.Rmd)

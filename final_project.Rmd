@@ -279,6 +279,10 @@ model_month = lme(GSI ~ month + gender + education,
                   control = lmeControl(opt='optim'))
 summary(model_month)$tTable
 
+summ = summary(model_month)$tTable
+summ[2,1] - summ[2,2] * qt(0.975, summ[2,3]) # lower bound
+summ[2,1] + summ[2,2] * qt(0.975, summ[2,3]) # upper bound
+
 kableExtra::kable(summary(model_month)$tTable, "latex", 3)
 
 # control
@@ -286,6 +290,10 @@ model_intercept = lme(GSI ~ month + gender + education,
                       random= ~ 1 | SN, data = dat_cc_con_g,
                       control = lmeControl(opt='optim'))
 summary(model_intercept)$tTable
+
+summ = summary(model_intercept)$tTable
+summ[2,1] - summ[2,2] * qt(0.975, summ[2,3]) # lower bound
+summ[2,1] + summ[2,2] * qt(0.975, summ[2,3]) # upper bound
 
 kableExtra::kable(summary(model_intercept)$tTable, "latex", 3)
 ```
@@ -397,6 +405,10 @@ model_month = lme(GSI ~ treatment + month + gender + education,
                   random= ~ month | SN, data = dat_cc_g,
                   control = lmeControl(opt='optim'))
 summary(model_month)$tTable
+
+summ = summary(model_month)$tTable
+summ[2,1] - summ[2,2] * qt(0.975, summ[2,3]) # lower bound
+summ[2,1] + summ[2,2] * qt(0.975, summ[2,3]) # upper bound
 
 kableExtra::kable(summary(model_month)$tTable, "latex", 3)
 ```

@@ -113,8 +113,9 @@ It is important to note that the normality assumption violations seem to be caus
 \noindent As a result, in addition to the linear mixed-effects models, a set of Generalized Estimating Equation (GEE) models are also conducted. The GEE model is commonly considered a non-parametric alternative to the mixed-effects model in longitudinal analysis. While the GEE model does not allow for individual-specific inference, there is no distributional assumptions that need to be satisfied for the model to produce reliable results. The GEE model under the linear model framework can be thought of as a generalization to the least squares method for estimating the regression parameters, which directly finds the set of parameters that minimizes the residual sum of squares without imposing the normality assumption. The removal of the normality assumption makes the GEE model more robust against the residuals' deviation from the normal distribution. Therefore, by if the analysis results are consistent between the linear mixed-effects models and the GEE models, we know that the analysis results are more reliable.\\\\
 Note that for the GEE models to hold with the missing data removed, we do require that the missing values are missing completely at random. In other words, the reason for missing depends on neither the missing value itself nor any of the other variables in the model. Again, without knowing whether this assumption holds, we check how sensitive our analysis results are to these missing values in \cref{sec:handling.missing.data}. Finally, as a required input for the GEE models, we need to specify a covariance structure of the responses. An unstructed covariance is selected in all of our models, which, as shown in the next section, provides very robust parameter estimates.
 \subsection{Analysis results}\label{sec:analysis.results}
-\subsubsection{Changes in Mental Distress over Time}
-\begin{table}[H]
+The outputs from both the linear mixed-effects model and the GEE model for studying the changes in mental distress over time in the intervention group are shown in \cref{tab:lme.treatment,tab:gee.treatment}. First we look at the output from the linear mixed-effects model. It is clear that there is strong evidence (p-value $\approx 0$) that the effect of the month variable on the GSI scores is not zero. Recall that the GSI scores have been scaled by a factor of $10$. This then means that, with all of the other variables held fixed, as time goes on by a month, on average the GSI scores of the participants in the intervention group decrease by 0.0047. Then over the course of the study (60 months), the average decrease in GSI in the intervention group is estimated to be $0.282$, again with the other variables held fixed. The corresponding 95\% confidence interval of this estimated decrease in GSI per month is $(0.0030, 0.0063)$. From \cref{tab:gee.treatment}, we see that the GEE model ouputs a similar set of results, indicating the conclusions drawn are reliable. Note that the naive and robust standard errors are similar for each estimated effect, indicating the pre-selected unstructured covariance structure yield robust estimates.\\\\
+Similarly, by \cref{tab:lme.control,tab:gee.control}, we can draw a reliable conclusion that there is moderate evidence (p-value = 0.017) that the effect of the month variable on the GSI scores is not zero. Particularly, with all of the other variables held fixed, as time goes on by a month, on average the GSI scores of the participants in the intervention group decrease by 0.0020 (0.12 over the course of the study). The corresponding 95\% confidence interval of this estimated decrease is $(0.0004, 0.0036)$. Overall, we have found that the mental distresses of the participants in both the intervention group and the control group decrease over time, although the amount of decrease may be small on a monthly level. These results are consistent with the preliminary conclusions drawn in \cref{sec:eda}.\\
+\begin{table}[b]
 \begin{minipage}{0.5\textwidth}
 \centering
 \resizebox{\linewidth}{!}{
@@ -158,7 +159,8 @@ education & -0.194 & 0.170 & -1.146 & 0.173 & -1.125\\
 \end{minipage}
 \end{table}
 
-\begin{table}[H]
+\noindent\noindent It might have been noticed that the above conclusions appear to contradict with the fact that most of the 95\% confidence intervals of individually estimated effects of the month variable seem to cover both sides of zero (\cref{fig:4c,fig:6c}). However, we note that these individual confidence intervals are fit with no more than five observations each, and so the corresponding uncertainties may be unusually large. As we simultaneously consider all participants in each group, the uncertainty of the estimated effect on the month variable should decrease. This ultimately leads to a small yet significant effect of the month variable on the GSI scores, which is in fact consistent with \cref{fig:4c,fig:6c}.\\
+\begin{table}[t]
 \begin{minipage}{0.5\textwidth}
 \centering
 \resizebox{\linewidth}{!}{
@@ -201,10 +203,7 @@ education & -0.809 & 0.225 & -3.596 & 0.203 & -3.994\\
 \label{tab:gee.control}
 \end{minipage}
 \end{table}
-
-\subsubsection{Effectiveness of Mental Health Intervention}
-
-\begin{table}[H]
+\begin{table}[b]
 \begin{minipage}{0.5\textwidth}
 \centering
 \resizebox{\linewidth}{!}{
@@ -252,5 +251,8 @@ education & -0.455 & 0.136 & -3.337 & 0.139 & -3.278\\
 \end{minipage}
 \end{table}
 
+\noindent\noindent To answer whether mental health intervention is effective in reducing the level of mental distress, we look at the outputs from the linear mixed-effects models and the GEE models, which include both groups of participants and also the treatment variable as an additional explanatory variable. Note that since treatment variable is binary and that the intervention group is used as the baseline. Therefore the estimated effects of the treatment in \cref{tab:lme,tab:gee} describe the average difference in GSI scores in the control group when compared against the intervention group with the other variables held fixed. We see from \cref{tab:lme} that there is no evidence (p-value = 0.792) against that the average GSI scores are the same across the two groups with all other variables held fixed. In fact, the 95\% confidence interval of this estimated difference in GSI between the two groups, with the other variables held fixed, is $(-16.34, 12.48)$ (again recall the GSI scores have been scaled by a factor of 10). This means that mental health intervention do not appear to have a significant effect in reducing the level of mental distress.\\\\
+From \cref{tab:gee}, we note that the GEE model's estimated effect on the treatment variable is about twice of that from the linear mixed-effects model. However, with standard errors at least as large as $0.641$, the corresponding 95\% confidence interval still covers both sides of zero, indicating there is no clear evidence against that the treatment effect is zero. Therefore, the conclusions drawn above is still reliable. Finally we note that this is also consistent with the preliminary conclusions from \cref{sec:eda}.
 \subsection{Handling Missing Data} \label{sec:handling.missing.data}
+
 \cite{little2019statistical}

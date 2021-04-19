@@ -198,6 +198,11 @@ model_month = lme(GSI ~ month + gender + education,
                   control = lmeControl(opt='optim'))
 summary(model_month)$tTable
 
+# CI
+summ = summary(model_month)$tTable
+summ[2,1] - summ[2,2] * qt(0.975, summ[2,3]) # lower bound
+summ[2,1] + summ[2,2] * qt(0.975, summ[2,3]) # upper bound
+
 # lme assumption check
 qqnorm(model_month$residuals)
 qqline(model_month$residuals)

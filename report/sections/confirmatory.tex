@@ -78,39 +78,40 @@ It is important to note, though, that each participant's gender and education va
 As shown in \cref{tab:model.comp.treatment.me.lrt}, a stepwise procedure is used when comparing models that contain different random effect terms. We first note that adding a random effect term on the intercept leads to better fit model (p-value $\approx 0$). Then among the three covariates, there is moderate evidence that adding a random effect on the month variable leads to a better fit (p-value = 0.028). Finally, there is no evidence against that further including random effects on either gender or education results in the same level of goodness-of-fit (p-values $>0.893$). Therefore, when studying the changes in mental distress over time in the intervention group, a model that includes random effects on the intercept and the month variable is most appropriate.\\\\
 Following the same procedure, as shown in \cref{app:re.control}, a random effect term is only added to the intercept term when studying the changes in mental distress over time in the control group. In \cref{app:re.both}, we see that random effect terms are added to both the intercept and the month variable.
 \subsection{Assumption Check}
-
+Before presenting the analysis results from the linear mixed-effects models selected above, recall that there are two distributional assumptions. Particularly, both the residuals and the random effects corresponding to each explanatory variable are assumed to be normally distributed with mean 0. Again as an example, we check whether these assumptions hold for the case of studying the changes in mental distress in the intervention group using the plots in \cref{fig:residual.treatment}.\\\\
+\cref{fig:5a} shows the scatter plot between the fitted values and the residuals. Similar to \cref{sec:eda}, p-values from the t-test and Wilcoxon test quantifying the evidence against that the mean of the residuals is 0 are shown in the caption. We see that residuals seem to have a mean of 0. \cref{fig:5b} shows the residual QQ plot. If the residuals were indeed normally distributed, the dots in the plot should follow the slanted line closely. We see that this is clearly not the case for the larger residuals. This indicates that the normality assumption on the residuals may not hold. The QQ plots for both groups of the mixed effects are shown in \cref{fig:5c,fig:5d}. Similar to that of the residuals, while there is no evidence against that the means are 0 (p-values $> 0.335$), the normality assumptions seem to be violated. Overall, it seems like the normality assumptions of the linear mixed-effects model do not hold. This is also the case for the models investigating the changes in mental distress over time in the control group and the effectiveness of the treatment (\cref{app:assumption.check}). Therefore, we run the risk of drawing misleading conclusions if we draw conclusions only based off this set of linear mixed-effects models.\\\\
+It is important to note that the normality assumption violations seem to be caused by a good portion of the responses rather than a small fraction of outliers. A common remedy in this case is to apply a log transformation of the response variables. However, this does not seem to help with the current set of data.
 \begin{figure}[H]
 \centering
-\begin{subfigure}{.4\textwidth}
-  \centering
-  \includegraphics[width=1\linewidth]{../../plots/qq_residual_treatment.png}
-  \caption{residual QQ plot}
-\end{subfigure}
-\begin{subfigure}{.4\textwidth}
+\begin{subfigure}{.24\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/residual_treatment.png}
   \caption{fitted value vs. residual (t-test: 1, Wilcoxon: 0.204)}
+  \label{fig:5a}
 \end{subfigure}
-\caption{Visualizing the residuals of the LME model under the intervention group}
-\label{fig:residual.treatment}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\begin{subfigure}{.4\textwidth}
+\begin{subfigure}{.24\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{../../plots/qq_residual_treatment.png}
+  \caption{residual QQ plot}
+  \label{fig:5b}
+\end{subfigure}
+\begin{subfigure}{.24\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/qq_intercept_treatment.png}
   \caption{QQ plot for the random effects on the intercept (t-test: 1, Wilcoxon: 0.335)}
+  \label{fig:5c}
 \end{subfigure}
-\begin{subfigure}{.4\textwidth}
+\begin{subfigure}{.24\textwidth}
   \centering
   \includegraphics[width=1\linewidth]{../../plots/qq_slope_treatment.png}
   \caption{QQ plot for the random effects on the slope (t-test: 1, Wilcoxon: 0.781)}
+  \label{fig:5d}
 \end{subfigure}
-\caption{Visualizing the random effects under the intervention group}
-\label{fig:re.treatment}
+\caption{Visualizing the residuals and random effects of the LME model under the intervention group}
+\label{fig:residual.treatment}
 \end{figure}
-
+\noindent As a result, in addition to the linear mixed-effects models, a set of Generalized Estimating Equation (GEE) models are also conducted. The GEE model is commonly considered a non-parametric alternative to the mixed-effects model in longitudinal analysis. While the GEE model does not allow for individual-specific inference, there is no distributional assumptions that need to be satisfied for the model to produce reliable results. The GEE model under the linear model framework can be thought of as a generalization to the least squares method for estimating the regression parameters, which directly finds the set of parameters that minimizes the residual sum of squares without imposing the normality assumption. The removal of the normality assumption makes the GEE model more robust against the residuals' deviation from the normal distribution. Therefore, by if the analysis results are consistent between the linear mixed-effects models and the GEE models, we know that the analysis results are more reliable.\\\\
+Note that for the GEE models to hold with the missing data removed, we do require that the missing values are missing completely at random. In other words, the reason for missing depends on neither the missing value itself nor any of the other variables in the model. Again, without knowing whether this assumption holds, we check how sensitive our analysis results are to these missing values in \cref{sec:handling.missing.data}. Finally, as a required input for the GEE models, we need to specify a covariance structure of the responses. An unstructed covariance is selected in all of our models, which, as shown in the next section, provides very robust parameter estimates.
 \subsection{Analysis results}\label{sec:analysis.results}
 \subsubsection{Changes in Mental Distress over Time}
 \begin{table}[H]
